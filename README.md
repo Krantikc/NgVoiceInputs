@@ -1,55 +1,169 @@
-# AngularStarterProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
+# NgVoiceInputs
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Deployment
-Use any webserver to deploy build artificacts.  
-* Apache Server  
-* Apache Tomcat Server  
-* nginx  
-* http-server (node module)  
-
-### Installation of http-server module
-Run `npm install -g http-server`.  
-Copy the build artifacts generated during build process to any path you wish.  
-Goto the path in command prompt and run `http-server -p80`. Or any other port you wish - `http-server -pPORT_NUMBER`  
   
-### Installation & deployment in apache tomcat9 server
-* [Download Tomcat 9](https://downloads.apache.org/tomcat/tomcat-9/v9.0.34/bin/apache-tomcat-9.0.34.zip) and extract.  
-* Copy & replace contents of build artifacts i.e. `dist/` folder contents to `apache-tomcat-9.0.34/webapps/ROOT`  
-* Edit & Modify tomcat server config file i.e `apache-tomcat-9.0.34/conf/server.xml` to change server port number as below  
-```<Connector port="80" protocol="HTTP/1.1"
-               connectionTimeout="20000"
-               redirectPort="8443" />
-```     
-* Goto `apache-tomcat-9.0.34/bin` folder and execute - `startup.bat` file  
+This library use speech recognition feature to fill the input fields for Angular application. It supports HTML5 inputs and angular material inputs as well.
+It supports date, text, number fields.
 
-#### For Windows 10 users -  
-If it fails to start server as port 80 is already in use, follow below steps  
-1) OPEN YOUR WINDOW COMMAND WITH ADMINISTRATOR PREVILEGE THEN:  
-2) Run `net stop http /y`  
-3) Run `sc config http start= disabled` to disable http server start on startup  
+ ##  To install:
 
-## Further help
+`npm install --save ng-voice-inputs`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Requisites
+This plugin requires `moment` library to run flawlessly
+\
+[Moment Js V2.24.0](https://www.npmjs.com/package/moment)
+\
+`npm install --save moment@2.24.0`
+\
+NOTE: Please install momentjs v2.24.0 before using the module
+
+## Usage
+Import the module `NgVoiceInputsModule` into `AppModule`
+  
+````
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
+@NgModule({
+  ...
+  imports: [NgVoiceInputsModule,...]
+  ...
+})
+export  class  AppModule { }
+````
+
+Then use the component `<ng-voice-input></ng-voice-input>` to trigger / start voice recognition
+\
+And also add the directive `vuiInput` to all the input fields for which speech recognition service is required.
+#
+app.component.html
+
+Example 1: With Angular Material Input Fields
+````
+<form  class="section left-section"  #form="ngForm"  (ngSubmit)="submitForm(form)">
+
+	<ng-voice-input (onValueChange)="onResponse($event)"  [style]="styleOpts"></ng-voice-input>
+
+	<div  class="row">
+
+		<mat-form-field  class="col-6">
+			<mat-label>Choose from date</mat-label>
+			<input  matInput  [matDatepicker]="picker"  [vuiInput]="optionsDate"  name="fromDate"  ngModel>
+			<mat-datepicker-toggle  matSuffix  [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker  #picker  ></mat-datepicker>
+		</mat-form-field>
+
+	</div>
+
+	<div  class="row">
+
+		<mat-form-field  class="col-6">
+			<mat-label>First Name</mat-label>
+			<input  matInput  type="text"  [vuiInput]="optionsText"  name="firstName"  ngModel>
+		</mat-form-field>
+		
+
+		<mat-form-field  class="col-6">
+			<mat-label>Age</mat-label>
+			<input  matInput  type="text"  [vuiInput]="optionsNumber"  name="age"  ngModel>
+		</mat-form-field>
+		
+	</div>
+
+	<input  type="date"  [vuiInput]="optionsDate"  name="dob"  ngModel>
+	<button  mat-raised-button  [vuiInput]="">Submit</button>
+
+</form>
+````
+
+Example 2: Pure HTML5 Inputs with ngModel
+````
+<form  class="section left-section"  #form="ngForm"  (ngSubmit)="submitForm(form)">
+
+	<input  matInput  type="text"  [vuiInput]="optionsText"  name="firstName"  ngModel>
+	<input  matInput  type="number"  [vuiInput]="optionsNumber"  name="age"  ngModel>
+	<input  type="date"  [vuiInput]="optionsDate"  name="dob"  ngModel>
+	<button [vuiInput]="">Submit</button>
+
+</form>
+````
+\
+app.component.ts
+````
+@Component({
+	selector:  'app-root',
+	templateUrl:  './app.component.html',
+	styleUrls: ['./app.component.scss']
+})
+
+export  class  AppComponent  implements  OnInit {
+	
+	optionsText = {
+		type:  'text'
+	}
+
+	optionsDate = {
+		type:  'date'
+	}
+
+	optionsNumber = {
+		type:  'number'
+	}
+
+	optionsAddress = {
+		type:  'address'
+	}
+
+	optionsSelect = {
+		type:  'select'
+	}
+
+	styleOpts = {
+		iconParse:  'icon icon-mic-green',
+		animationParse:  'parse-green'
+	}
+
+	constructor() {}
+
+	ngOnInit(): void {}
+	
+	onResponse(evt) {
+		console.log(evt)
+	}
+	submitForm(form) {
+		console.table(form.value);
+	}
+}
+````
+
+## Documentation
+
+### Properties
+1) `VuiInputDirective (vuiInput)` directive expects object `InputOption`. 
+
+````
+InputOption: {
+    type: string,
+    format: string
+}
+
+InputOption.type: Possible values are: 'text', 'address', 'date', 'number'. Default: 'text'
+InputOption.format: MomentJs date format. Default: 'DD/MM/YYYY'
+  ````
+
+2) `NgVoiceInputsComponent (<ng-voice-input></ng-voice-input>)` component expects `StyleOptions`. Optional
+````
+StyleOptions: {
+	containerClass:  string,
+	iconStart: string,
+	iconParse:  string,
+}
+
+StyleOptions.containerClass: Class name for the component. Default: 'centered'
+StyleOptions.iconStart: Class name for mic icon when it is idle or before start of voice recognition. Default: 'icon icon-mic'
+StyleOptions.iconParse: Class name for mic icon when it is listening to speech and parsing. Default: 'icon icon-mic'
+
+````
+
+## Demo Example
+[Angular Speech Recognition Forms](https://krantikc.github.io/angular-vui-form/)
