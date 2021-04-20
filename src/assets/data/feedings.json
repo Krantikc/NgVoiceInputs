@@ -1,0 +1,26 @@
+{
+    "speechMappings": [{
+      "order": 1,
+      "priority": 1,
+      "keys": ["get results for", "search results for", "find results for", "find for", "search for", "get for", "find", "search", "get"],
+      "action": "SEARCH"
+    },
+    {
+      "order": 2,
+      "priority": 1,
+      "keys": ["repositories", "repository", "repos", "repo", "code"],
+      "action": "REPOS"
+    },
+    {
+      "order": 2,
+      "priority": 2,
+      "keys": ["users", "folks", "people", "developers", "coders", "engineers"],
+      "action": "USERS"
+    },
+    {
+      "order": 3,
+      "priority": 1,
+      "keys": ["from+to", "from", "to" ],
+      "action": "DATE_RANGE"
+    }]
+}

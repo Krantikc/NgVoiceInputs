@@ -1,0 +1,81 @@
+.vui-example {
+    h1 {
+        font-size: 28px;
+        text-align: center;
+        padding: 20px;
+        color: #0a9d9d;
+        margin-bottom: 30px;
+        background: #ecfff9;
+        border-bottom: 3px solid #aaffe4;
+    }
+    .main-container {
+        display: flex;
+        justify-content: space-between;
+
+        .left-section {
+            width: 80%;
+            margin-right: 30px;
+            padding: 0 30px;
+            border-right: 1px solid #EBEBEB;
+        }
+
+        .right-section {
+            background: #fdffdc;
+            padding: 20px;
+        }
+    }
+
+    .form-submit-data {
+        background: #ecfff9;
+        padding: 20px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .vui-example {
+        .main-container {
+            flex-direction: column;
+            .left-section {
+                width: 100%;
+                margin: 0 0 20px 0;
+                border: 0;
+            }
+        }
+    }
+}
+
+@mixin rings($duration, $delay, $color) {
+    opacity: 0;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: 0;
+    bottom: 0;
+    content: '';
+    border: 3px solid $color;
+    border-radius: 100%;
+    animation-name: ripple;
+    animation-duration: $duration;
+    animation-delay: $delay;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.65,0,.34,1);
+    z-index: -1;
+}
+
+:host ::ng-deep .icon {
+    &.parse-green {
+        &::after {
+            @include rings(0.5s, 0s, #05c54f);
+        }
+        &::before {
+            @include rings(1s, 0.3s, #00722c);
+        }
+    }
+
+    &.listen-green {
+        &::after {
+            @include rings(5s, 0s, #05c54f);
+        }
+    }
+}

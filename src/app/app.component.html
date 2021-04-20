@@ -1,0 +1,102 @@
+<div class="vui-example">
+    <h1>Voice Based Date Pickers and Text inputs</h1>
+
+    <div class="main-container container">
+        <form class="section left-section" #form="ngForm" (ngSubmit)="submitForm(form)">
+            <ng-voice-input (onValueChange)="onResponse($event)" [style]="styleOpts"></ng-voice-input>
+            <div class="row">
+                <mat-form-field class="col-6">
+                    <mat-label>Choose from date</mat-label>
+                    <input matInput [matDatepicker]="picker" [vuiInput]="optionsDate" name="fromDate" ngModel>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker ></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field  class="col-6">
+                    <mat-label>Choose to date</mat-label>
+                    <input matInput [matDatepicker]="pickerT" [vuiInput]="optionsDate" name="toDate" ngModel>
+                    <mat-datepicker-toggle matSuffix [for]="pickerT"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerT ></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field  class="col-6">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" [vuiInput]="optionsText" name="firstName" ngModel>
+                </mat-form-field>
+                <mat-form-field  class="col-6">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" [vuiInput]="optionsText" name="lastName" ngModel>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field  class="col-6">
+                    <mat-label>Age</mat-label>
+                    <input matInput type="text" [vuiInput]="optionsNumber" name="age" ngModel>
+                </mat-form-field>
+
+                <mat-form-field  class="col-6">
+                    <mat-label>Occupation</mat-label>
+                    <input matInput type="text" [vuiInput]="optionsText" name="occupation" ngModel>
+                </mat-form-field>
+                
+            </div>
+            <div class="row">
+                <mat-form-field class="col-6">
+                    <mat-label>Address line 1</mat-label>
+                    <textarea matInput type="text" [vuiInput]="optionsAddress" name="address-line1"></textarea>
+                </mat-form-field>  
+                <mat-form-field class="col-6">
+                    <mat-label>Address line 2</mat-label>
+                    <textarea matInput type="text" [vuiInput]="optionsAddress" name="address-line2"></textarea>
+                </mat-form-field>    
+            </div>
+            <button mat-raised-button [vuiInput]="">Submit</button>
+            
+        </form>
+
+        <div class="section right-section">
+            <h3>Usage</h3>
+            <ul>
+                <li>Click on <b>Mic (<i class="icon icon-small icon-mic-blue"></i>)</b> button, to begin voice recongnition</li>
+                <li>Say something like
+                    <ul>
+                        <li>'January 21st 2021'</li>
+                        <li>'August 15th 1947'</li>
+                        <li>'November 27 2021'</li>
+                    </ul>
+                </li>
+                <li>Once datepicker field is filled, you can navigate the focus to next input field by saying <b>'go to next'</b> or <b>'next'</b></li>
+                <li>And go back to previous input field by saying <b>'go to previous'</b></li>
+                <li>Once finished entering all the fields, navigaten to <b>Submit</b> button by saying <b>'go to last'</b> and say <b>'submit' or 'click'</b> to submit the form</li>
+                <li>You can STOP speech recognition by saying <b>'stop'</b> or by clicking the mic icon again.</li>
+            </ul>
+
+            <div><i>NOTE:</i> For the input type <b>'address'</b>, please use prefixes like <b>'go'</b> or <b>'goto'</b> or <b>'switch to'</b> without fail</div>
+        </div>
+    </div>
+
+    <div class="container form-submit-data col-md-6" *ngIf="formData">
+        <h4>Form Submit Details</h4>
+        <div class="row">
+            <div class="col-6">
+                <label>Start Date</label>
+                <span>{{formData?.startDate}}</span>
+            </div>
+            <div class="col-6">
+                <label>End Date</label>
+                <span>{{formData?.endDate}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>First Name</label>
+                <span>{{formData?.firstName}}</span>
+            </div>
+            <div class="col-6">
+                <label>Last Name</label>
+                <span>{{formData?.lastName}}</span>
+            </div>
+        </div>
+    </div>
+</div>
