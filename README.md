@@ -1,6 +1,8 @@
 
 # NgVoiceInputs
 
+[![npm version](https://img.shields.io/npm/v/ng-voice-inputs)](https://npmjs.com/package/ng-voice-inputs)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/ng-voice-inputs)](https://bundlephobia.com/result?p=ng-voice-inputs)
   
 This library use speech recognition feature to fill the input fields for Angular application. It supports HTML5 inputs and angular material inputs as well.
 It supports date, text, number fields.
