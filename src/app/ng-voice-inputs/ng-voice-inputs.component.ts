@@ -13,6 +13,11 @@ const DEFAULT_STYLE = {
   animationListen: 'listening'
 }
 
+const DEFAULT_SCROLL_OFFSET = 200;
+const DEFAULT_SCROLL_DURATION = 300;
+const DEFAULT_SCROLL_DIRECTION = 'vertical';
+
+
 @Component({
   selector: 'ng-voice-input',
   template: `
@@ -34,14 +39,33 @@ export class NgVoiceInputsComponent implements OnInit {
   @Input()
   style;
 
+  @Input()
+  scrollOffset;
+
+  @Input()
+  scrollDuration;
+
   @Output()
   onValueChange: EventEmitter<any> = new EventEmitter();
+
+  /**
+   * Decides direction of scroll movement ( Up or Down ) or ( Left or Right) 
+   * +ve value indicates Down/Right and -ve value idicates Up/Left
+   */
+  activeDirection: number = +1;
+
+  /**
+   * Decides direction of Scroll ( Vertical or Horizontal )
+   */
+  scrollDirection: string = DEFAULT_SCROLL_DIRECTION;
   
   constructor(private vuiService: VuiVoiceRecognitionService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
 
     this.style = { ...DEFAULT_STYLE, ...this.style };
+    this.scrollOffset = this.scrollOffset || DEFAULT_SCROLL_OFFSET;
+    this.scrollDuration = this.scrollDuration || DEFAULT_SCROLL_DURATION;
 
     try {
       this.initVoiceRecognition();
@@ -51,6 +75,79 @@ export class NgVoiceInputsComponent implements OnInit {
     }
 
     this.vuiService.response.subscribe(this.vuiResponseSubscription.bind(this));
+  }
+
+  
+
+  scrollToTop = (duration) => {
+    let interval = setInterval(() => {
+        var pos = Math.abs(Math.round((window.pageYOffset / (duration / 100))));
+        if ( pos > 0 ) {
+            window.scrollTo( 0, pos - 20 ); // how far to scroll on each step
+        } else {
+            clearInterval(interval);
+        }
+    }, 100);
+  } 
+  
+  scrollBy = (offset, duration, direction?) => {
+    this.activeDirection = (offset / offset);
+    this.scrollDirection = direction || DEFAULT_SCROLL_DIRECTION;
+    if (offset == 1) {
+      offset = window.outerHeight;
+    }
+    let val = Math.abs(Math.round((offset / (duration / 100)))); 
+    let totalOffset = 0;
+
+    let interval = setInterval(() => {
+      if (totalOffset >= Math.abs(offset)) {
+        clearInterval(interval);
+      } else {
+        let opt = { 
+          top: offset < 0 ? -1 * val : val, 
+          left: 0 
+        };
+        if (direction == 'horizontal') {
+          opt = { 
+            top: 0, 
+            left: offset < 0 ? -1 * val : val
+          };
+        }
+        window.scrollBy({
+          ...opt, 
+          behavior: 'smooth'
+        });
+        totalOffset = totalOffset + val;
+      }
+      
+    }, 100);
+  }
+
+  scroll = {
+    SCROLLDOWN: () => {
+      this.scrollBy(this.scrollOffset, this.scrollDuration);
+    },
+    SCROLLUP: () => {
+      this.scrollBy(-1 * this.scrollOffset, this.scrollDuration);
+    },
+    SCROLLRIGHT: () => {
+      this.scrollBy(this.scrollOffset, this.scrollDuration, 'horizontal');
+    },
+    SCROLLLEFT: () => {
+      this.scrollBy(-1 * this.scrollOffset, this.scrollDuration, 'horizontal');
+    },
+    SCROLLBOTTOM: () => {
+      this.scrollBy(1, this.scrollDuration);
+    },
+    SCROLLTOP: () => {
+      this.scrollToTop(this.scrollDuration);
+    },
+    SCROLLCONTINUE: () => {
+      const factor = Math.ceil(window.outerHeight / this.scrollDuration);
+
+      console.log(factor * this.scrollDuration, factor)
+      this.scrollBy(window.outerHeight, factor * 1000);
+    }
   }
 
   vuiResponseSubscription(data) {
@@ -70,6 +167,8 @@ export class NgVoiceInputsComponent implements OnInit {
       this.vuiService.inputRefs[currentRef].nativeElement.value = '';
     } else if (data.type == 'COMMAND_CLICK') {
       this.vuiService.inputRefs[currentRef].nativeElement.click();
+    } else if (data.type.includes('COMMAND_SCROLL')) {
+      this.scroll[data.type.replace('COMMAND_','')].call();
     } else if (data.type == 'COMMAND_STOP') {
       this.stopRecognition();
     } else {

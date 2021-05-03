@@ -105,14 +105,31 @@ const KEY_WORDS_BCK_NAV = ['back', 'backward', 'previous'];
 const KEY_WORDS_CLEAR = ['clear', 'clean', 'delete', 'remove'];
 const KEY_WORDS_CLICK = ['click', 'submit', 'expand', 'open', 'show'];
 const KEY_WORDS_STOP = ['stop', 'end', 'done'];
+const KEY_WORDS_SCROLL_UP = ['scroll up', 'go up', 'up'];
+const KEY_WORDS_SCROLL_DOWN = ['scroll down', 'go down', 'down'];
+const KEY_WORDS_SCROLL_RIGHT = ['scroll right', 'go right', 'right'];
+const KEY_WORDS_SCROLL_LEFT = ['scroll left', 'go left', 'left'];
+const KEY_WORDS_SCROLL_TOP = ['scroll top', 'go top', 'top'];
+const KEY_WORDS_SCROLL_BOTTOM = ['scroll bottom', 'go bottom', 'bottom'];
+const KEY_WORDS_SCROLL_CONTINUE = ['keep scrolling', 'scroll', 'scrolling', 'continue scrolling']
+const KEY_WORDS_SCROLL = [
+  ...KEY_WORDS_SCROLL_UP,
+  ...KEY_WORDS_SCROLL_DOWN,
+  ...KEY_WORDS_SCROLL_RIGHT,
+  ...KEY_WORDS_SCROLL_LEFT,
+  ...KEY_WORDS_SCROLL_TOP,
+  ...KEY_WORDS_SCROLL_BOTTOM,
+  ...KEY_WORDS_SCROLL_CONTINUE
+];
 
-const KEY_WORDS_INST = ['goto', 'switch', 'go', ...KEY_WORDS_CLEAR, ...KEY_WORDS_CLICK]; // Instruction types
+const KEY_WORDS_INST = ['goto', 'switch', 'go', ...KEY_WORDS_CLEAR, ...KEY_WORDS_CLICK, ...KEY_WORDS_SCROLL]; // Instruction types
 const KEY_WORDS_NAV = [
-                        ...KEY_WORDS_FWD_NAV, 
-                        ...KEY_WORDS_BCK_NAV,
-                        ...KEY_WORDS_STOP,
-                        , 'first', 'last',
-                      ]; // Navigation types
+  ...KEY_WORDS_FWD_NAV,
+  ...KEY_WORDS_BCK_NAV,
+  ...KEY_WORDS_STOP,
+  ...KEY_WORDS_SCROLL
+  , 'first', 'last',
+]; // Navigation types
 
 const KEY_WORDS = [...KEY_WORDS_INST, ...KEY_WORDS_NAV];
 
@@ -123,7 +140,14 @@ const INST_MAPPINGS = {
   last: ['last'],
   clear: KEY_WORDS_CLEAR,
   click: KEY_WORDS_CLICK,
-  stop: KEY_WORDS_STOP 
+  stop: KEY_WORDS_STOP,
+  scrollUp: KEY_WORDS_SCROLL_UP,
+  scrollDown: KEY_WORDS_SCROLL_DOWN,
+  scrollLeft: KEY_WORDS_SCROLL_LEFT,
+  scrollRight: KEY_WORDS_SCROLL_RIGHT,
+  scrollTop: KEY_WORDS_SCROLL_TOP,
+  scrollBottom: KEY_WORDS_SCROLL_BOTTOM,
+  scrollContinue: KEY_WORDS_SCROLL_CONTINUE
 }
 @Injectable({
   providedIn: 'root'

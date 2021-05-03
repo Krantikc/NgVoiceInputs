@@ -1,5 +1,15 @@
 <div class="vui-example">
-    <h1>Voice Based Date Pickers and Text inputs</h1>
+    <h1>Voice Based Date Pickers and Text inputs
+        <div style="
+                display: flex;
+                justify-content: center;
+                padding: 10px 0;
+        ">
+            <a href="https://www.npmjs.com/package/ng-voice-inputs">
+                <img src="https://img.shields.io/npm/v/ng-voice-inputs.svg" />
+            </a>
+        </div>
+    </h1>
 
     <div class="main-container container">
         <form class="section left-section" #form="ngForm" (ngSubmit)="submitForm(form)">
@@ -69,6 +79,10 @@
                 <li>Once datepicker field is filled, you can navigate the focus to next input field by saying <b>'go to next'</b> or <b>'next'</b></li>
                 <li>And go back to previous input field by saying <b>'go to previous'</b></li>
                 <li>Once finished entering all the fields, navigaten to <b>Submit</b> button by saying <b>'go to last'</b> and say <b>'submit' or 'click'</b> to submit the form</li>
+                <li><b>Page Scroll Feature</b>: 
+                <li>Say <b>Scroll Down</b> to scroll page downwards. And <b>Scroll Up</b> to scroll upwards. Also supports <b>Left</b> & <b>Right</b></li>
+                <li>Say <b>Continue Scrolling</b> to scroll continuously downwards / upwards.</li>
+                
                 <li>You can STOP speech recognition by saying <b>'stop'</b> or by clicking the mic icon again.</li>
             </ul>
 
@@ -98,5 +112,45 @@
                 <span>{{formData?.lastName}}</span>
             </div>
         </div>
+    </div>
+
+    <div class="container speech-recognition-info col-md-8">
+        <h3>Speech Recognition</h3>
+        <p>
+            Speech recognition is an interdisciplinary subfield of computer science and computational linguistics that develops methodologies and technologies that enable the recognition and translation of spoken language into text by computers. It is also known as automatic speech recognition (ASR), computer speech recognition or speech to text (STT). It incorporates knowledge and research in the computer science, linguistics and computer engineering fields.
+            Some speech recognition systems require "training" (also called "enrollment") where an individual speaker reads text or isolated vocabulary into the system. The system analyzes the person's specific voice and uses it to fine-tune the recognition of that person's speech, resulting in increased accuracy. Systems that do not use training are called "speaker independent"[1] systems. Systems that use training are called "speaker dependent".
+            Speech recognition applications include voice user interfaces such as voice dialing (e.g. "call home"), call routing (e.g. "I would like to make a collect call"), domotic appliance control, search key words (e.g. find a podcast where particular words were spoken), simple data entry (e.g., entering a credit card number), preparation of structured documents (e.g. a radiology report), determining speaker characteristics,[2] speech-to-text processing (e.g., word processors or emails), and aircraft (usually termed direct voice input).
+            The term voice recognition[3][4][5] or speaker identification[6][7][8] refers to identifying the speaker, rather than what they are saying. Recognizing the speaker can simplify the task of translating speech in systems that have been trained on a specific person's voice or it can be used to authenticate or verify the identity of a speaker as part of a security process.
+            From the technology perspective, speech recognition has a long history with several waves of major innovations. Most recently, the field has benefited from advances in deep learning and big data. The advances are evidenced not only by the surge of academic papers published in the field, but more importantly by the worldwide industry adoption of a variety of deep learning methods in designing and deploying speech recognition systems.
+        </p>
+
+        <p>
+            The 1980s also saw the introduction of the n-gram language model.
+            1987 – The back-off model allowed language models to use multiple length n-grams, and CSELT used HMM to recognize languages (both in software and in hardware specialized processors, e.g. RIPAC).
+            Much of the progress in the field is owed to the rapidly increasing capabilities of computers. At the end of the DARPA program in 1976, the best computer available to researchers was the PDP-10 with 4 MB ram.[23] It could take up to 100 minutes to decode just 30 seconds of speech.[26]
+            Two practical products were:
+
+            1987 – a recognizer from Kurzweil Applied Intelligence
+            1990 – Dragon Dictate, a consumer product released in 1990[27][28] AT&T deployed the Voice Recognition Call Processing service in 1992 to route telephone calls without the use of a human operator.[29] The technology was developed by Lawrence Rabiner and others at Bell Labs.
+            By this point, the vocabulary of the typical commercial speech recognition system was larger than the average human vocabulary.[23] Raj Reddy's former student, Xuedong Huang, developed the Sphinx-II system at CMU. The Sphinx-II system was the first to do speaker-independent, large vocabulary, continuous speech recognition and it had the best performance in DARPA's 1992 evaluation. Handling continuous speech with a large vocabulary was a major milestone in the history of speech recognition. Huang went on to found the speech recognition group at Microsoft in 1993. Raj Reddy's student Kai-Fu Lee joined Apple where, in 1992, he helped develop a speech interface prototype for the Apple computer known as Casper.
+
+            Lernout & Hauspie, a Belgium-based speech recognition company, acquired several other companies, including Kurzweil Applied Intelligence in 1997 and Dragon Systems in 2000. The L&H speech technology was used in the Windows XP operating system. L&H was an industry leader until an accounting scandal brought an end to the company in 2001. The speech technology from L&H was bought by ScanSoft which became Nuance in 2005. Apple originally licensed software from Nuance to provide speech recognition capability to its digital assistant Siri.[30]
+
+            2000s
+            In the 2000s DARPA sponsored two speech recognition programs: Effective Affordable Reusable Speech-to-Text (EARS) in 2002 and Global Autonomous Language Exploitation (GALE). Four teams participated in the EARS program: IBM, a team led by BBN with LIMSI and Univ. of Pittsburgh, Cambridge University, and a team composed of ICSI, SRI and University of Washington. EARS funded the collection of the Switchboard telephone speech corpus containing 260 hours of recorded conversations from over 500 speakers.[31] The GALE program focused on Arabic and Mandarin broadcast news speech. Google's first effort at speech recognition came in 2007 after hiring some researchers from Nuance.[32] The first product was GOOG-411, a telephone based directory service. The recordings from GOOG-411 produced valuable data that helped Google improve their recognition systems. Google Voice Search is now supported in over 30 languages.
+
+            In the United States, the National Security Agency has made use of a type of speech recognition for keyword spotting since at least 2006.[33] This technology allows analysts to search through large volumes of recorded conversations and isolate mentions of keywords. Recordings can be indexed and analysts can run queries over the database to find conversations of interest. Some government research programs focused on intelligence applications of speech recognition, e.g. DARPA's EARS's program and IARPA's Babel program.
+
+            In the early 2000s, speech recognition was still dominated by traditional approaches such as Hidden Markov Models combined with feedforward artificial neural networks.[34] Today, however, many aspects of speech recognition have been taken over by a deep learning method called Long short-term memory (LSTM), a recurrent neural network published by Sepp Hochreiter & Jürgen Schmidhuber in 1997.[35] LSTM RNNs avoid the vanishing gradient problem and can learn "Very Deep Learning" tasks[36] that require memories of events that happened thousands of discrete time steps ago, which is important for speech. Around 2007, LSTM trained by Connectionist Temporal Classification (CTC)[37] started to outperform traditional speech recognition in certain applications.[38] In 2015, Google's speech recognition reportedly experienced a dramatic performance jump of 49% through CTC-trained LSTM, which is now available through Google Voice to all smartphone users.[39]
+
+            The use of deep feedforward (non-recurrent) networks for acoustic modeling was introduced during later part of 2009 by Geoffrey Hinton and his students at University of Toronto and by Li Deng[40] and colleagues at Microsoft Research, initially in the collaborative work between Microsoft and University of Toronto which was subsequently expanded to include IBM and Google (hence "The shared views of four research groups" subtitle in their 2012 review paper).[41][42][43] A Microsoft research executive called this innovation "the most dramatic change in accuracy since 1979".[44] In contrast to the steady incremental improvements of the past few decades, the application of deep learning decreased word error rate by 30%.[44] This innovation was quickly adopted across the field. Researchers have begun to use deep learning techniques for language modeling as well.
+
+            In the long history of speech recognition, both shallow form and deep form (e.g. recurrent nets) of artificial neural networks had been explored for many years during 1980s, 1990s and a few years into the 2000s.[45][46][47] But these methods never won over the non-uniform internal-handcrafting Gaussian mixture model/Hidden Markov model (GMM-HMM) technology based on generative models of speech trained discriminatively.[48] A number of key difficulties had been methodologically analyzed in the 1990s, including gradient diminishing[49] and weak temporal correlation structure in the neural predictive models.[50][51] All these difficulties were in addition to the lack of big training data and big computing power in these early days. Most speech recognition researchers who understood such barriers hence subsequently moved away from neural nets to pursue generative modeling approaches until the recent resurgence of deep learning starting around 2009–2010 that had overcome all these difficulties. Hinton et al. and Deng et al. reviewed part of this recent history about how their collaboration with each other and then with colleagues across four groups (University of Toronto, Microsoft, Google, and IBM) ignited a renaissance of applications of deep feedforward neural networks to speech recognition.[42][43][52][53]
+
+            2010s
+            By early 2010s speech recognition, also called voice recognition[54][55][56] was clearly differentiated from speaker recognition, and speaker independence was considered a major breakthrough. Until then, systems required a "training" period. A 1987 ad for a doll had carried the tagline "Finally, the doll that understands you." – despite the fact that it was described as "which children could train to respond to their voice".[12]
+
+            In 2017, Microsoft researchers reached a historical human parity milestone of transcribing conversational telephony speech on the widely benchmarked Switchboard task. Multiple deep learning models were used to optimize speech recognition accuracy. The speech recognition word error rate was reported to be as low as 4 professional human transcribers working together on the same benchmark, which was funded by IBM Watson speech team on the same task.[57]
+        </p>
     </div>
 </div>
